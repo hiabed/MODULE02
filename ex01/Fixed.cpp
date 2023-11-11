@@ -6,6 +6,18 @@ Fixed::Fixed()
     fixed_point = 0;
 }
 
+Fixed::Fixed(const int nb)
+{
+    (void)nb;
+    // (int) converts it to the corresponding fixed-point value.
+}
+
+Fixed::Fixed(const float nb)
+{
+    (void)nb;
+    // (float) converts it to the corresponding fixed-point value.
+}
+
 Fixed::Fixed(const Fixed &copy_constructor)
 {
     std::cout << "Copy constructor called\n";
