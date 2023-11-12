@@ -44,8 +44,8 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat( void ) const
 {
+    return ((float)fixed_point / (1 << frac_bits));
     // converts the fixed-point value to a floating-point value.
-    return 1;
 }
 
 int Fixed::toInt( void ) const
@@ -66,6 +66,6 @@ Fixed& Fixed::operator=(const Fixed &other) //copy assignement;
 
 std::ostream &operator<<(std::ostream &output, Fixed const &i)
 {
-    output << i.getRawBits();
+    output << i.toFloat();
     return output;
 }
