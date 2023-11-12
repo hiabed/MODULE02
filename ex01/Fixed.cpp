@@ -8,7 +8,7 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int nb)
 {
-    (void)nb;
+    fixed_point = nb * (int)pow(2, frac_bits);
     // (int) converts it to the corresponding fixed-point value.
 }
 
@@ -48,4 +48,16 @@ int Fixed::getRawBits(void) const
 void Fixed::setRawBits(int const raw)
 {
     fixed_point = raw;
+}
+
+float Fixed::toFloat( void ) const
+{
+    // converts the fixed-point value to a floating-point value.
+    return 1;
+}
+
+int Fixed::toInt( void ) const
+{
+    // converts the fixed-point value to an integer value.
+    return 2;
 }
