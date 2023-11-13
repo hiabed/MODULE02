@@ -1,28 +1,11 @@
 #include "Fixed.hpp"
 
-<<<<<<< HEAD
-Fixed::Fixed()
-=======
 Fixed::Fixed() //default constructor;
->>>>>>> 5c12158b539d478fe8e60a2f8570279e5ec8c656
 {
     std::cout << "Default constructor called\n";
     fixed_point = 0;
 }
 
-<<<<<<< HEAD
-Fixed::Fixed(const int number)
-{
-    fixed_point = number * 2;
-}
-
-Fixed::Fixed(const int fl_point)
-{
-
-}
-
-Fixed::Fixed(const Fixed &copy_constructor)
-=======
 Fixed::Fixed(const int nb) //constructor parametrized with int;
 {
     std::cout << "Int constructor called\n";
@@ -32,31 +15,17 @@ Fixed::Fixed(const int nb) //constructor parametrized with int;
 
 Fixed::Fixed(const float nb) //constructor parametrized with float;
 {
-    
+    std::cout << "Float constructor called\n";
     fixed_point = (roundf(nb * (1 << frac_bits)));
     // (float) converts it to the corresponding fixed-point value.
 }
 
 Fixed::Fixed(const Fixed &copy_constructor) // copy constructor;
->>>>>>> 5c12158b539d478fe8e60a2f8570279e5ec8c656
 {
     std::cout << "Copy constructor called\n";
-    fixed_point = copy_constructor.fixed_point;
+    *this = copy_constructor;
 }
 
-<<<<<<< HEAD
-Fixed& Fixed::operator=(const Fixed &other)
-{
-    std::cout << "Copy assignment operator called\n";
-    if (this != &other) // Self-assignment check
-    {
-        fixed_point = other.fixed_point;
-    }
-    return *this;
-}
-
-=======
->>>>>>> 5c12158b539d478fe8e60a2f8570279e5ec8c656
 Fixed::~Fixed()
 {
     std::cout << "Destructor called\n";
@@ -64,16 +33,7 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits(void) const
 {
-<<<<<<< HEAD
     std::cout << "getRawBits member function called\n";
-    return 0;
-}
-
-void setRawBits(int const raw)
-{
-    raw;
-=======
-    // std::cout << "getRawBits member function called\n";
     return fixed_point;
 }
 
@@ -108,5 +68,4 @@ std::ostream &operator<<(std::ostream &output, Fixed const &i)
 {
     output << i.toFloat();
     return output;
->>>>>>> 5c12158b539d478fe8e60a2f8570279e5ec8c656
 }
