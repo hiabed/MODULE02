@@ -1,16 +1,15 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() //default constructor;
+Fixed::Fixed()
 {
     std::cout << "Default constructor called\n";
     fixed_point = 0;
 }
 
-Fixed::Fixed(const int nb) //constructor parametrized with int; (!v)
+Fixed::Fixed(const int nb)
 {
     std::cout << "Int constructor called\n";
     fixed_point = nb << frac_bits;
-    // (int) converts it to the corresponding fixed-point value.
 }
 
 Fixed::~Fixed()
@@ -29,10 +28,10 @@ void Fixed::setRawBits(int const raw)
     fixed_point = raw;
 }
 
-Fixed::Fixed(const float nb) //constructor parametrized with float;
+Fixed::Fixed(const float nb)
 {
     std::cout << "Float constructor called\n";
-    fixed_point = (roundf(nb * (1 << frac_bits))); //shifting a float by a non-integer value is not well-defined behavior in C++.
+    fixed_point = (roundf(nb * (1 << frac_bits)));
     // (float) converts it to the corresponding fixed-point value.
 }
 
@@ -42,16 +41,15 @@ float Fixed::toFloat( void ) const
     // converts the fixed-point value to a floating-point value.
 }
 
-int Fixed::toInt( void ) const
+int Fixed::toInt( void ) const //const at the end means const member function. means i cant modify any member variable;
 {
-    int to_int = fixed_point >> frac_bits;
-    return to_int;
+    return fixed_point >> frac_bits;
 }
 
-Fixed::Fixed(const Fixed &copy_constructor) // copy constructor;
+Fixed::Fixed(const Fixed &other)
 {
     std::cout << "Copy constructor called\n";
-    *this = copy_constructor;
+    *this = other;
 }
 
 Fixed& Fixed::operator=(const Fixed &other) //copy assignement;
@@ -115,20 +113,20 @@ Fixed Fixed::operator-(Fixed const &obj)
 Fixed Fixed::operator*(Fixed const &obj)
 {
     Fixed res; 
-    res.fixed_point = fixed_point / 256 * obj.fixed_point;
+    res.fixed_point = fixed_point  * obj.fixed_point / (1 << frac_bits);
     return res;
 }
 
 Fixed Fixed::operator/(Fixed const &obj)
 {
     Fixed res;
-    res.fixed_point = fixed_point / obj.fixed_point * 256;
+    res.fixed_point = (fixed_point * (1 << frac_bits) / obj.fixed_point);
     return res;
 }
 
 Fixed &Fixed::operator++()
 {
-    ++fixed_point; //pre-increment
+    ++fixed_point;
     return *this;
 }
 
@@ -147,12 +145,12 @@ Fixed &Fixed::min(Fixed &obj1, Fixed &obj2)
         return obj2;
 }
 
-Fixed &Fixed::min(Fixed const &obj1, Fixed const &obj2)
+const Fixed &Fixed::min(const Fixed &obj1, const Fixed &obj2)
 {
     if(obj1.fixed_point <= obj2.fixed_point)
-        return (Fixed)obj1;
+        return obj1;
     else
-        return (Fixed)obj2;
+        return obj2;
 }
 
 Fixed &Fixed::max(Fixed &obj1, Fixed &obj2)
@@ -163,11 +161,11 @@ Fixed &Fixed::max(Fixed &obj1, Fixed &obj2)
         return obj2;
 }
 
-Fixed &Fixed::max(Fixed const &obj1, Fixed const &obj2)
+const Fixed &Fixed::max(const Fixed &obj1, const Fixed &obj2)
 {
     if(obj1.fixed_point >= obj2.fixed_point)
-        return (Fixed)obj1;
+        return obj1;
     else
-        return (Fixed)obj2;
+        return obj2;
 }
 

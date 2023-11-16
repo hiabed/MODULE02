@@ -32,7 +32,7 @@ void Fixed::setRawBits(int const raw)
 Fixed::Fixed(const float nb) //constructor parametrized with float;
 {
     std::cout << "Float constructor called\n";
-    fixed_point = (roundf(nb * (1 << frac_bits))); //shifting a float by a non-integer value is not well-defined behavior in C++.
+    fixed_point = (roundf(nb * (1 << frac_bits)));
     // (float) converts it to the corresponding fixed-point value.
 }
 
@@ -48,13 +48,13 @@ int Fixed::toInt( void ) const
     return to_int;
 }
 
-Fixed::Fixed(const Fixed &copy_constructor) // copy constructor;
+Fixed::Fixed(const Fixed &other)
 {
     std::cout << "Copy constructor called\n";
-    *this = copy_constructor;
+    *this = other;
 }
 
-Fixed& Fixed::operator=(const Fixed &other) //copy assignement;
+Fixed& Fixed::operator=(const Fixed &other)
 {
     std::cout << "Copy assignment operator called\n";
     if (this != &other) // Self-assignment check;
@@ -64,8 +64,8 @@ Fixed& Fixed::operator=(const Fixed &other) //copy assignement;
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &output, Fixed const &fixed) //operator overloading;
+std::ostream &operator<<(std::ostream &output, Fixed const &object) //operator overloading;
 {
-    output << fixed.toFloat();
+    output << object.toFloat();
     return output;
 }
