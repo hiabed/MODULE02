@@ -1,16 +1,15 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() //default constructor;
+Fixed::Fixed()
 {
     std::cout << "Default constructor called\n";
     fixed_point = 0;
 }
 
-Fixed::Fixed(const int nb) //constructor parametrized with int; (!v)
+Fixed::Fixed(const int nb)
 {
     std::cout << "Int constructor called\n";
     fixed_point = nb << frac_bits;
-    // (int) converts it to the corresponding fixed-point value.
 }
 
 Fixed::~Fixed()
@@ -29,17 +28,15 @@ void Fixed::setRawBits(int const raw)
     fixed_point = raw;
 }
 
-Fixed::Fixed(const float nb) //constructor parametrized with float;
+Fixed::Fixed(const float nb)
 {
     std::cout << "Float constructor called\n";
     fixed_point = (roundf(nb * (1 << frac_bits)));
-    // (float) converts it to the corresponding fixed-point value.
 }
 
 float Fixed::toFloat( void ) const
 {
     return ((float)fixed_point / (1 << frac_bits));
-    // converts the fixed-point value to a floating-point value.
 }
 
 int Fixed::toInt( void ) const
@@ -57,14 +54,14 @@ Fixed::Fixed(const Fixed &other)
 Fixed& Fixed::operator=(const Fixed &other)
 {
     std::cout << "Copy assignment operator called\n";
-    if (this != &other) // Self-assignment check;
+    if (this != &other)
     {
         fixed_point = other.fixed_point;
     }
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &output, Fixed const &object) //operator overloading;
+std::ostream &operator<<(std::ostream &output, Fixed const &object)
 {
     output << object.toFloat();
     return output;

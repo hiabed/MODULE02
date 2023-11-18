@@ -11,12 +11,12 @@ class Fixed
 	static const int frac_bits = 8;
 
   public:
-	Fixed();                              // Default constructor
-	Fixed(const Fixed &copy_constructor); // Copy constructor
-	Fixed &operator=(const Fixed &other); // Copy assignment operator
-	Fixed(const int nb);	  			  // Parametrized constructor
-	Fixed(const float nb);				  // Parametrized constructor
-	~Fixed();                             // Destructor
+	Fixed();
+	Fixed(const Fixed &copy_constructor);
+	Fixed &operator=(const Fixed &other);
+	Fixed(const int nb);
+	Fixed(const float nb);
+	~Fixed();
 	void setRawBits(int const raw);
 	int getRawBits(void) const;
 	float toFloat( void ) const;

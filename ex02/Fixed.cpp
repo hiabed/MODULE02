@@ -32,16 +32,14 @@ Fixed::Fixed(const float nb)
 {
     std::cout << "Float constructor called\n";
     fixed_point = (roundf(nb * (1 << frac_bits)));
-    // (float) converts it to the corresponding fixed-point value.
 }
 
 float Fixed::toFloat( void ) const
 {
     return ((float)fixed_point / (1 << frac_bits));
-    // converts the fixed-point value to a floating-point value.
 }
 
-int Fixed::toInt( void ) const //const at the end means const member function. means i cant modify any member variable;
+int Fixed::toInt( void ) const
 {
     return fixed_point >> frac_bits;
 }
@@ -52,10 +50,10 @@ Fixed::Fixed(const Fixed &other)
     *this = other;
 }
 
-Fixed& Fixed::operator=(const Fixed &other) //copy assignement;
+Fixed& Fixed::operator=(const Fixed &other)
 {
     std::cout << "Copy assignment operator called\n";
-    if (this != &other) // Self-assignment check;
+    if (this != &other)
         fixed_point = other.fixed_point;
     return *this;
 }
@@ -130,7 +128,7 @@ Fixed &Fixed::operator++()
     return *this;
 }
 
-Fixed Fixed::operator++(int) // post-increment;
+Fixed Fixed::operator++(int)
 {
     Fixed original(*this);
     fixed_point++;
@@ -168,4 +166,3 @@ const Fixed &Fixed::max(const Fixed &obj1, const Fixed &obj2)
     else
         return obj2;
 }
-
